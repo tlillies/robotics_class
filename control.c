@@ -1,3 +1,8 @@
+#include <Sparki.h>
+/*
+ * Basic control for sparki robot given shortest path
+ */
+
 
 float current_x = 0;
 float current_y = 0;
@@ -46,4 +51,5 @@ void loop() {
     }
     sparki.motorRotate(MOROT_LEFT,DIR_CCW,left_v);
     sparki.motorRotate(MOTOR_RIGHT,DIR_CW,right_v);
+    delay(50);
 }
