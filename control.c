@@ -2,7 +2,19 @@
 /*
  * Basic control for sparki robot given shortest path
  */
-
+float xi = 0;
+float yi = 0;
+int xint;
+int yint;
+float theta = 0;
+float r = 2.55; // cm
+float d = 8.45; // cm
+float motorSpeed = 2.7724; // cm/s
+float wheelSpeed = motorSpeed / r; // 1/s
+float wheelRight = 0;
+float wheelLeft = 0;
+unsigned long time;
+float deltaTime;
 
 float current_x = 0;
 float current_y = 0;
@@ -52,4 +64,10 @@ void loop() {
     sparki.motorRotate(MOROT_LEFT,DIR_CCW,left_v);
     sparki.motorRotate(MOTOR_RIGHT,DIR_CW,right_v);
     delay(50);
+
+    deltaTime = float((millis() - time)) / 1000.0;
+    xi = xi + cos(theta) * (r * wheelRight / 2 + r * wheelLeft / 2) * deltaTime;
+    yi = yi + sin(theta) * (r * wheelRight / 2 + r * wheelLeft / 2) * deltaTime;
+    theta = theta + (wheelRight * r / d - wheelLeft * r / d) * deltaTime;
+    time = millis();
 }
